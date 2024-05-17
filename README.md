@@ -4,8 +4,9 @@ This is an official repo for 임상정보를 이용한 AI 기반 환자 맞춤�
 
 ## Description
 
-We propose a practical generalized framework for classifying driver drowsiness states to improve accessibility and convenience by separating the normalization process for each driver. We considered the statistics of each domain separately since they vary among domains. Moreover, we gathered samples from all the subjects/domains in a domain-balanced and class-balanced manner and composed a mini-batch.
+뇌졸중은 뇌혈관이 막히거나 터지면서 뇌에 손상이 생기는 뇌혈관 질환으로, 의료 기술의 발전에도 세계적으로 장애 발생의 3대 원인 중 하나이다. 뇌졸중을 진단하고 예측하여 효과적인 재활 및 치료 계획을 수립하는 것이 중요하다. 뇌졸중의 다양성으로 인해 회복 가능성에 큰 차이가 있으며, 실제 임상에서는 각 의료진의 경험과 지식에 따라 환자의 예후를 예측하여 정확도에 편차가 있다. 따라서 효과적인 재활 및 치료 계획 수립을 위하여 인공지능(AI)을 활용한 뇌졸중 환자의 예후 예측 연구가 중요하다. 본 연구/논문/초록에서는 아래 그림과 같이 병원에 입원한 뇌졸중 환자의 임상 정보를 사용하여 환자의 단기 예후를 예측하는 프레임워크를 제안한다. 그리고 데이터셋의 불균형을 해결하기 위해 다양한 데이터 오버샘플링 기법을 비교하였다.
 
+![](docs/framework.png)
 
 ## Getting Started
 
