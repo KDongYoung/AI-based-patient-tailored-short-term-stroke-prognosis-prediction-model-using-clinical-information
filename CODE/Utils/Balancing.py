@@ -10,7 +10,7 @@ def Balance(balance_name, seed, X,Y):
         sampler = RandomOverSampler(random_state=seed)
         X, Y = sampler.fit_resample(X, Y)
         
-    elif balance_name=="CWROS": # weighted_random_oversampling
+    elif balance_name=="WROS": # weighted_random_oversampling
         from collections import Counter
         counts = Counter()
         classes = [] 
@@ -35,7 +35,13 @@ def Balance(balance_name, seed, X,Y):
         from imblearn.over_sampling import SMOTE
         smote = SMOTE(random_state=seed)
         X, Y = smote.fit_resample(X, Y)
-                
+        
+    elif balance_name=="SMOTE_Tomek":
+        from imblearn.combine import SMOTETomek
+        from imblearn.under_sampling import TomekLinks
+        smoteto = SMOTETomek(tomek=TomekLinks(sampling_strategy='majority'), random_state=seed)
+        X, Y = smoteto.fit_resample(X, Y)
+        
     elif balance_name=="ADASYN":
         from imblearn.over_sampling import ADASYN
         adasyn = ADASYN(random_state=seed)
