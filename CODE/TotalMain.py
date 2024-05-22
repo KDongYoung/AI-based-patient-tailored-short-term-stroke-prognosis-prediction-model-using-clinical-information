@@ -4,7 +4,7 @@ Paper "AI-based patient-tailored short-term stroke prognosis prediction model us
 Author: Dong-Young Kim
 Date: May 17, 2024
 Email: dy_kim@chamc.co.kr
-Organization: MIH Lab, CHA University / CHA Future 
+Organization: MIH Lab, CHA University / CHA Future Medicine Research Institute, CHA Bundang Medical Center
 """
 
 
@@ -55,6 +55,7 @@ if __name__ == '__main__':
     parser.add_argument('--normalize', default='', help='standard, min max, robust')
     parser.add_argument('--balance', default='', help='random_oversampling (ROS), weighted_random_oversampling (WROS), SMOTE, SMOTE_Tomek, ADASYN')
     parser.add_argument('--feature_select', default='rfec', help='rfec')
+    parser.add_argument('--selected_feature_name', default=[], help='selected_feature_name by "featre_select"')
     
     parser.add_argument('--batch_size', type=int, default=16, metavar='N', help='input batch size of each subject for training (default: 16)') 
     parser.add_argument('--valid_batch_size', type=int, default=1, metavar='N', help='valid batch size for training (default: 1)') 
@@ -73,14 +74,14 @@ if __name__ == '__main__':
     args["normalize"]='robust'
     args["n_classes"]=2
     
-    for model_name in ['rf', 'lr', 'svm', 'xgb', 'gbt', 'knn']:
-        print(model_name)
-        args["model_name"]=model_name
-        args["balance"]=''
-        Main.main(args, "ML")
+    # for model_name in ['rf', 'lr', 'svm', 'xgb', 'gbt', 'knn']:
+    #     print(model_name)
+    #     args["model_name"]=model_name
+    #     args["balance"]=''
+    #     Main.main(args, "ML")
     
     args["model_name"]='lightGBM'
-    for balance in ['', 'ROS', 'WROS', 'SMOTE', 'ADASYN']:
-        print(model_name, balance)
+    for balance in ['WROS']: # '', 'ROS', 'WROS', 'SMOTE', 'ADASYN'
+        print('lightGBM', balance)
         args["balance"]=balance
         Main.main(args, "ML")

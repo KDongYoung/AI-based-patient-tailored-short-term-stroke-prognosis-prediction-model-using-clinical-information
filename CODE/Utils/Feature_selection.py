@@ -17,5 +17,5 @@ def Feature_Selection(name, dataset, target, max_iter, seed):
         feature=[col[i] for i in rfe_cv.get_support(indices=True)]
         print(F"{len(feature)} Selected feature by RFECV: {feature}") # Selected feature name
 
-    return pd.concat([pd.DataFrame(X), Y.reset_index(drop=True)], axis=1)     
+    return pd.concat([pd.DataFrame(X, columns=feature), Y.reset_index(drop=True)], axis=1)     
     

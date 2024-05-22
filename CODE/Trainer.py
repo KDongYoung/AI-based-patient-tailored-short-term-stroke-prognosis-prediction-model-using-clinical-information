@@ -4,6 +4,7 @@ import pickle
 # EVALUATION
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from sklearn.preprocessing import LabelBinarizer     
+from Utils.Interpretation import XAI
 
 class Trainer():
     def __init__(self, args, model, model_type):
@@ -38,25 +39,29 @@ class Trainer():
     ###########################################################################################
     '''    
     ## EVALUATE 
-    def eval(self, phase, loader):
+    def eval(self, phase, loader, fold):
         loss=torch.tensor(0)
         
         targets=[]
         preds=[]
+        total_data=torch.tensor([])
         
         with torch.no_grad(): 
             for datas in loader:
-                data, target = datas[0].to(self.args['device']), datas[1].to(self.args['device'], dtype=torch.int64)
+                data, target = datas[0], datas[1].to(dtype=torch.int64)
                 
-                pred = self.model.predict(data.cpu()) # predict    
+                total_data=torch.cat([total_data, data])
+                pred = self.model.predict(data) # predict    
                 preds.append(torch.tensor(pred)) 
                 targets.append(target)
-                
+        
+        XAI(self.model, total_data.cpu().numpy(), fold, self.args["selected_feature_name"], self.args["save_root"] + str(self.args['seed']))
+        
         preds=torch.cat(preds)
         targets=torch.cat(targets)
                     
-        targets=targets.cpu().numpy()
-        preds=preds.cpu().numpy()
+        targets=targets.numpy()
+        preds=preds.numpy()
     
 
         acc=accuracy_score(targets, preds)

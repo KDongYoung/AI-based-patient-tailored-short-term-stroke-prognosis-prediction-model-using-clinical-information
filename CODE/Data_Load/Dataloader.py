@@ -30,7 +30,8 @@ def init_dataset(name, args):
     ## Preprocess (feature selection and rearrange dataset)
     dataset=load_preprocess(dataset, name, args)
     dataset=Feature_Selection(args["feature_select"], dataset, args['target'], args["max_iter"], args["seed"])
-
+    args["selected_feature_name"]=dataset.columns[:-1]
+    
     return dataset
 
 def preprocess(args, train, valid, type):         

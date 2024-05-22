@@ -64,7 +64,7 @@ def start_Training(args, model_type):
         TRAIN_LOADER, TEST_LOADER=Dataloader.preprocess(args, INTERNAL_DATASET.iloc[TRAIN, :], INTERNAL_DATASET.iloc[TEST, :], model_type)
         trainer=Trainer.Trainer(args, model, model_type)
         trainer.train(TRAIN_LOADER, i+1) 
-        r=trainer.eval("valid", TEST_LOADER)
+        r=trainer.eval("valid", TEST_LOADER, i+1)
         internal_result.append(r)   
     
     return internal_result    
